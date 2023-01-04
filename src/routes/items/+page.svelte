@@ -38,7 +38,11 @@
 	<Body>
 		{#each items as item}
 			<Row>
-				<Cell>{item.name}</Cell>
+				<Cell>
+					<a href={`/items/${item._id}`}>
+						{item.name}
+					</a>
+				</Cell>
 				<Cell>{item.description}</Cell>
 			</Row>
 		{/each}

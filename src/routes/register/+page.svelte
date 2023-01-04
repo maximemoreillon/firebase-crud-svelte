@@ -1,44 +1,39 @@
-<!-- TODO: Loader -->
 <script lang="ts">
 	import Textfield from '@smui/textfield';
 	import Icon from '@smui/textfield/icon';
 	import Button, { Label, Icon as BtnIcon } from '@smui/button';
-
+	import { goto } from '$app/navigation';
 	import { currentUser } from '$lib/firebase';
-	import { signInWithEmailAndPassword, getAuth, signOut } from 'firebase/auth';
+	import { createUserWithEmailAndPassword, getAuth } from 'firebase/auth';
 
 	let email = '';
 	let password = '';
-	let loggingIn = false;
+	let passwordConfirm = '';
+	let loading = false;
+
 	const auth = getAuth();
 
-	const login = async () => {
-		loggingIn = true;
+	const register = async () => {
+		if (password !== passwordConfirm) return alert('Passwords do not match');
+		loading = true;
 		try {
-			await signInWithEmailAndPassword(auth, email, password);
+			await createUserWithEmailAndPassword(auth, email, password);
+			goto('/home');
 		} catch (error) {
 			alert(error);
 			console.error(error);
 		} finally {
-			loggingIn = false;
+			loading = false;
 		}
-	};
-
-	const logout = async () => {
-		await signOut(auth);
 	};
 </script>
 
-<h2>Login</h2>
+<h2>Register</h2>
 
 {#if $currentUser}
 	<p>Logged in as {$currentUser.email}</p>
-	<Button on:click={logout}>
-		<BtnIcon class="material-icons">logout</BtnIcon>
-		<Label>Logout</Label>
-	</Button>
 {:else}
-	<form on:submit|preventDefault={login}>
+	<form on:submit|preventDefault={register}>
 		<Textfield bind:value={email} label="E-mail">
 			<Icon class="material-icons" slot="leadingIcon">person</Icon>
 		</Textfield>
@@ -47,13 +42,17 @@
 			<Icon class="material-icons" slot="leadingIcon">key</Icon>
 		</Textfield>
 
+		<Textfield bind:value={passwordConfirm} label="Password confirm" type="password">
+			<Icon class="material-icons" slot="leadingIcon">key</Icon>
+		</Textfield>
+
 		<Button>
-			<BtnIcon class="material-icons">login</BtnIcon>
-			<Label>Login</Label>
+			<BtnIcon class="material-icons">add</BtnIcon>
+			<Label>Register</Label>
 		</Button>
 
 		<p>
-			No account yet? Click <a href="/register">here</a> to register.
+			Already have an account? Click <a href="/login">here</a> to login.
 		</p>
 	</form>
 {/if}
