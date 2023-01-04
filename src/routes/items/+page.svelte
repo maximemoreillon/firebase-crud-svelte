@@ -39,7 +39,7 @@
 		{#each items as item}
 			<Row>
 				<Cell>
-					<a href={`/items/${item._id}`}>
+					<a href={`/items/${item.id}`}>
 						{item.name}
 					</a>
 				</Cell>
