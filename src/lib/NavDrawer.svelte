@@ -8,8 +8,7 @@
 		{ text: 'Home', href: '/', icon: 'home' },
 		{ text: 'Items', href: '/items', icon: 'list' },
 		{ text: 'Login', href: '/login', icon: 'login' },
-		{ text: 'Register', href: '/register', icon: 'person_add' },
-		{ text: 'About', href: '/about', icon: 'help' }
+		{ text: 'Register', href: '/register', icon: 'person_add' }
 	];
 </script>
 

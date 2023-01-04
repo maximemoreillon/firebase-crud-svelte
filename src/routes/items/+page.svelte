@@ -1,5 +1,6 @@
 <script lang="ts">
 	import DataTable, { Head, Body, Row, Cell } from '@smui/data-table';
+	import { currentUser } from '$lib/firebase';
 
 	import { onMount } from 'svelte';
 
@@ -23,28 +24,33 @@
 	};
 </script>
 
-<h1>Items</h1>
-<p>
-	<NewItemDialog />
-</p>
+<h2>Items</h2>
 
-<DataTable>
-	<Head>
-		<Row>
-			<Cell>Name</Cell>
-			<Cell>Description</Cell>
-		</Row>
-	</Head>
-	<Body>
-		{#each items as item}
+{#if $currentUser}
+	<p>
+		<NewItemDialog />
+	</p>
+
+	<DataTable>
+		<Head>
 			<Row>
-				<Cell>
-					<a href={`/items/${item.id}`}>
-						{item.name}
-					</a>
-				</Cell>
-				<Cell>{item.description}</Cell>
+				<Cell>Name</Cell>
+				<Cell>Description</Cell>
 			</Row>
-		{/each}
-	</Body>
-</DataTable>
+		</Head>
+		<Body>
+			{#each items as item}
+				<Row>
+					<Cell>
+						<a href={`/items/${item.id}`}>
+							{item.name}
+						</a>
+					</Cell>
+					<Cell>{item.description}</Cell>
+				</Row>
+			{/each}
+		</Body>
+	</DataTable>
+{:else}
+	<p>This content is only accessible to authenticated users</p>
+{/if}
