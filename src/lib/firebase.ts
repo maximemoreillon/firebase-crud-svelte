@@ -2,28 +2,15 @@ import { getAuth } from 'firebase/auth';
 import { initializeApp } from 'firebase/app';
 import { writable } from 'svelte/store';
 
-import {
-	PUBLIC_FIREBASE_API_KEY,
-	PUBLIC_FIREBASE_AUTH_DOMAIN,
-	PUBLIC_FIREBASE_DATABASE_URL,
-	PUBLIC_FIREBASE_PROJECT_ID,
-	PUBLIC_FIREBASE_STORAGE_BUCKET,
-	PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
-	PUBLIC_FIREBASE_APP_ID,
-	PUBLIC_FIREBASE_MEASUREMENT_ID
-} from '$env/static/public';
-
 const firebaseConfig = {
-	apiKey: PUBLIC_FIREBASE_API_KEY,
-	authDomain: PUBLIC_FIREBASE_AUTH_DOMAIN,
-	databaseURL: PUBLIC_FIREBASE_DATABASE_URL,
-	projectId: PUBLIC_FIREBASE_PROJECT_ID,
-	storageBucket: PUBLIC_FIREBASE_STORAGE_BUCKET,
-	messagingSenderId: PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
-	appId: PUBLIC_FIREBASE_APP_ID,
-	measurementId: PUBLIC_FIREBASE_MEASUREMENT_ID
+	apiKey: 'AIzaSyAdp2YwweX93kIlLxnnCoa13t74RYYIQa8',
+	authDomain: 'fir-crud-vue-4d77d.firebaseapp.com',
+	projectId: 'fir-crud-vue-4d77d',
+	storageBucket: 'fir-crud-vue-4d77d.appspot.com',
+	messagingSenderId: '389740065764',
+	appId: '1:389740065764:web:c10c5ec631afa472c44df1',
+	measurementId: 'G-0L4J1DMNNL'
 };
-
 initializeApp(firebaseConfig);
 
 export const currentUser = writable<any>(null);
