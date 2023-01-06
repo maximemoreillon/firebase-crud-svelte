@@ -8,8 +8,8 @@ const firebaseConfig = {
 	projectId: 'fir-crud-vue-4d77d',
 	storageBucket: 'fir-crud-vue-4d77d.appspot.com',
 	messagingSenderId: '389740065764',
-	appId: '1:389740065764:web:c10c5ec631afa472c44df1',
-	measurementId: 'G-0L4J1DMNNL'
+	appId: '1:389740065764:web:51c57dfe631e67bcc44df1',
+	measurementId: 'G-S4MJDN29D5'
 };
 initializeApp(firebaseConfig);
 
