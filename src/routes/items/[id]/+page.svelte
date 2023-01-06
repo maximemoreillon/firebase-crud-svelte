@@ -5,7 +5,15 @@
 	import { goto } from '$app/navigation';
 
 	import { page } from '$app/stores';
-	import { getFirestore, collection, doc, getDoc, deleteDoc, updateDoc } from 'firebase/firestore';
+	import {
+		getFirestore,
+		collection,
+		doc,
+		getDoc,
+		deleteDoc,
+		updateDoc,
+		onSnapshot
+	} from 'firebase/firestore';
 
 	import Textfield from '@smui/textfield';
 	import Button, { Label, Icon } from '@smui/button';
@@ -72,17 +80,29 @@
 <h2>Item</h2>
 {#if $currentUser}
 	{#if item}
-		<Textfield bind:value={item.name} label="Name" input$emptyValueUndefined />
-		<Textfield bind:value={item.description} label="Description" input$emptyValueUndefined />
-		<Button type="submit" on:click={updateItem}>
-			<Icon class="material-icons">save</Icon>
-			<Label>Update item</Label>
-		</Button>
-		<Button type="submit" on:click={deleteItem}>
-			<Icon class="material-icons">delete</Icon>
-			<Label>Delete item</Label>
-		</Button>
+		<p>
+			<Button type="submit" on:click={updateItem}>
+				<Icon class="material-icons">save</Icon>
+				<Label>Update item</Label>
+			</Button>
+			<Button type="submit" on:click={deleteItem}>
+				<Icon class="material-icons">delete</Icon>
+				<Label>Delete item</Label>
+			</Button>
+		</p>
+		<div class="fields">
+			<Textfield bind:value={item.name} label="Name" input$emptyValueUndefined />
+			<Textfield bind:value={item.description} label="Description" input$emptyValueUndefined />
+		</div>
 	{/if}
 {:else}
 	<p>Only authenticated users can see this resource</p>
 {/if}
+
+<style scoped>
+	.fields {
+		display: flex;
+		flex-direction: column;
+		gap: 0.5rem;
+	}
+</style>

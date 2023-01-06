@@ -1,11 +1,8 @@
 <script lang="ts">
+	import { onMount, onDestroy } from 'svelte';
+	import { collection, getDocs, getFirestore, onSnapshot } from 'firebase/firestore';
 	import DataTable, { Head, Body, Row, Cell } from '@smui/data-table';
 	import { currentUser } from '$lib/firebase';
-
-	import { onMount } from 'svelte';
-
-	import { collection, getDocs, getFirestore } from 'firebase/firestore';
-
 	import NewItemDialog from '$lib/NewItemDialog.svelte';
 
 	let items: any = [];
@@ -18,8 +15,19 @@
 		try {
 			const firestore = getFirestore();
 			const collectionRef = collection(firestore, 'items');
-			const querySnapshot = await getDocs(collectionRef);
-			items = querySnapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
+
+			// Normal query
+			// const querySnapshot = await getDocs(collectionRef);
+			// items = collection.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
+
+			// Subscribe to firestore changes
+			const unsub = onSnapshot(collectionRef, (collection) => {
+				items = collection.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
+			});
+
+			onDestroy(() => {
+				unsub();
+			});
 		} catch (error) {}
 	};
 </script>

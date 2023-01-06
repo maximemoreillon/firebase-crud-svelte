@@ -16,7 +16,7 @@
 			const firestore = getFirestore();
 			const collectionRef = collection(firestore, 'items');
 			const { id } = await addDoc(collectionRef, newItem);
-			goto(`/items/${id}`);
+			// goto(`/items/${id}`);
 		} catch (error) {
 			console.error(error);
 		}
