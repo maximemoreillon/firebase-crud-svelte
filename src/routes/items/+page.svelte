@@ -18,7 +18,7 @@
 
 			// Normal query
 			// const querySnapshot = await getDocs(collectionRef);
-			// items = collection.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
+			// items = querySnapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
 
 			// Subscribe to firestore changes
 			const unsub = onSnapshot(collectionRef, (collection) => {

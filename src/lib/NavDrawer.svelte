@@ -14,7 +14,7 @@
 
 <Drawer variant="modal" bind:open fixed={false}>
 	<Header>
-		<Title>Schoolup</Title>
+		<Title>Firebase + Svelte</Title>
 		<Subtitle>Beta</Subtitle>
 	</Header>
 	<Content>
